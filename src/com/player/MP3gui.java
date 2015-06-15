@@ -76,5 +76,5 @@ class MP3gui extends JFrame {
         setContentPane(panel);
         pack();
     }
-    
+
 }
