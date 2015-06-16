@@ -3,8 +3,6 @@ package com.player;
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.media.MediaPlayer;
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 /**
  * Created by DK on 2015-06-15.
@@ -12,8 +10,8 @@ import java.awt.event.ActionListener;
 class MP3gui extends JFrame {
 
     private JPanel panel;
+    private JButton prevButton;
     private JButton nextButton;
-    private JButton previousButton;
     private JButton playButton;
     private JButton pauseButton;
     private JSlider slider1;
@@ -24,14 +22,13 @@ class MP3gui extends JFrame {
     private JFileChooser chooser;
     public MediaPlayer mediaPlayer;
     private String fileName;
-    private String name;
     private PlayAction playAction;
 
     public MP3gui() {
         chooser = new JFileChooser();
 
         OpenAction action = new OpenAction(chooser, songName);
-        playAction = new PlayAction(playButton, pauseButton, unpauseButton, stopButton);
+        playAction = new PlayAction(playButton, pauseButton, unpauseButton, stopButton, slider1, prevButton, nextButton);
         setTitle("HEH");
         JMenuBar menuBar = new JMenuBar();
         setJMenuBar(menuBar);
@@ -55,14 +52,18 @@ class MP3gui extends JFrame {
         playAction.getUnPauseButton();
         playAction.stopSong();
         playAction.getStopButton();
+        playAction.prevTrack();
+        playAction.getPrevButton();
+        playAction.nextTrack();
+        playAction.getNextButton();
+        playAction.setSliderVolume();
+        playAction.getSlider1();
 
-        PrevAction prevAction = new PrevAction(previousButton);
-        prevAction.getPrevButton();
 
         pauseButton = new JButton();
-        nextButton = new JButton();
+        prevButton = new JButton();
 
-        slider1 = new JSlider();
+
 
 
         SwingUtilities.invokeLater(new Runnable() {

@@ -22,6 +22,7 @@ class OpenAction extends JFrame  {
         if(result == JFileChooser.APPROVE_OPTION){
             fileName = chooser.getSelectedFile().toURI().toString();
             name = chooser.getSelectedFile().getName();
+            if (name.length() >35) name = name.substring(0, 32) + "...";
             songName.setText(name);
         }
     }
