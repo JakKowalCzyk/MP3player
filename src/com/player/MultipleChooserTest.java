@@ -11,12 +11,14 @@ import java.util.List;
  * Created by DK on 2015-06-16.
  */
 class MultipleChooserTest extends JFrame {
-    public MultipleChooserTest(JFileChooser chooser, JButton listButton, JLabel songName) {
+    public MultipleChooserTest(JFileChooser chooser, JButton listButton) {
         this.chooser = chooser;
         this.listButton = listButton;
-        this.songName = songName;
+
     }
     public void open() {
+        names = null;
+        files = null;
         FileNameExtensionFilter filter = new FileNameExtensionFilter("mp3 files", "mp3");
         chooser.setFileFilter(filter);
         int result = chooser.showOpenDialog(MultipleChooserTest.this);
@@ -27,8 +29,6 @@ class MultipleChooserTest extends JFrame {
                     return name.toLowerCase().endsWith(".mp3");
                 }
             });
-
-            fileName = chooser.getSelectedFile().toURI().toString();
             players = new ArrayList<>();
             names = new ArrayList<>();
             for (File f : files) {
@@ -55,10 +55,9 @@ class MultipleChooserTest extends JFrame {
         return players;
     }
 
-    private JLabel songName;
+
     private JFileChooser chooser;
     private JButton listButton;
-    private String fileName;
     private String name;
     private File[] files;
     private List<MediaPlayer> players;

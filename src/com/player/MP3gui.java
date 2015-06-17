@@ -29,16 +29,18 @@ class MP3gui extends JFrame {
     private PlayAction playAction;
     private List<MediaPlayer> players;
     private ArrayList<String> names;
+    private int howManyRuns = 0;
 
     public MP3gui() {
         chooser = new JFileChooser();
-        MultipleChooserTest chooserTest = new MultipleChooserTest(chooser, listButton, songName);
+        MultipleChooserTest chooserTest = new MultipleChooserTest(chooser, listButton);
         setTitle("HEH");
         listButton.addActionListener(e -> {
             chooserTest.open();
             players = chooserTest.getPlayers();
             names = chooserTest.getNames();
-            playAction = new PlayAction(playButton, pauseButton, unpauseButton, stopButton, slider1, prevButton, nextButton, songName, players, names, songSlider, timeLabel, list1);
+            playAction = new PlayAction(playButton, pauseButton, unpauseButton, stopButton, slider1, prevButton, nextButton,players, names, songSlider, timeLabel, list1);
+            playAction.setStop();
             playAction.runSong();
             playAction.prevTrack();
             playAction.getRunButton();

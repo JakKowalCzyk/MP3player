@@ -14,8 +14,8 @@ import java.util.List;
  * Created by DK on 2015-06-15.
  */
 class PlayAction extends JFrame {
-    public PlayAction(JButton runButton, JButton pauseButton, JButton unPauseButton, JButton stopButton, JSlider slider1, JButton prevButton, JButton nextButton,
-                      JLabel songName, List<MediaPlayer> players, ArrayList<String> names, JSlider songSlider, JLabel timeLabel, JList list1){
+    public PlayAction(JButton runButton, JButton pauseButton, JButton unPauseButton, JButton stopButton, JSlider slider1, JButton prevButton, JButton nextButton
+            ,List<MediaPlayer> players, ArrayList<String> names, JSlider songSlider, JLabel timeLabel, JList list1){
         this.runButton = runButton;
         this.pauseButton = pauseButton;
         this.unPauseButton = unPauseButton;
@@ -23,7 +23,6 @@ class PlayAction extends JFrame {
         this.slider1 = slider1;
         this.prevButton = prevButton;
         this.nextButton = nextButton;
-        this.songName = songName;
         this.players = players;
         this.names = names;
         this.songSlider = songSlider;
@@ -38,8 +37,9 @@ class PlayAction extends JFrame {
         });
     }
     public void play() {
+        list1.setSelectedIndex(i);
+        list1.ensureIndexIsVisible(i);
         if (this.mediaPlayer != null) mediaPlayer.stop();
-        songName.setText(names.get(i));
         this.mediaPlayer = players.get(i);
         mediaPlayer.setVolume(0.5);
         mediaPlayer.play();
@@ -47,7 +47,6 @@ class PlayAction extends JFrame {
         songSlider.setMinimum(0);
         songSlider.setValue(0);
         songSlider.setMaximum(duration);
-
         mediaPlayer.currentTimeProperty().addListener(new ChangeListener<Duration>() {
             @Override
             public void changed(ObservableValue<? extends Duration> observable, Duration duration, Duration current) {
@@ -156,7 +155,15 @@ class PlayAction extends JFrame {
             }
         });
     }
-
+    public void setStop(){
+        if (!runButton.isEnabled()) return;
+        else if (this.mediaPlayer != null){
+            mediaPlayer.stop();
+            runButton.setEnabled(true);
+            names = null;
+            players = null;
+        }
+    }
     public JButton getRunButton(){
         return runButton;
     }
@@ -190,7 +197,6 @@ class PlayAction extends JFrame {
     private JButton prevButton;
     private JButton nextButton;
     private MediaPlayer mediaPlayer;
-    private JLabel songName;
     private List<MediaPlayer> players;
     private ArrayList<String> names;
     private int i = 0;
