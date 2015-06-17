@@ -5,6 +5,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
 import javax.swing.*;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
@@ -51,36 +52,23 @@ class PlayAction extends JFrame {
             @Override
             public void changed(ObservableValue<? extends Duration> observable, Duration duration, Duration current) {
                 songSlider.setValue((int) current.toSeconds());
-            }
-        });
-        mediaPlayer.currentTimeProperty().addListener(new ChangeListener<Duration>() {
-            @Override
-            public void changed(ObservableValue<? extends Duration> observable, Duration duration, Duration current) {
                 double x = current.toMinutes();
                 setTimeLabel(x);
             }
         });
         songSlider.addMouseListener(new MouseListener() {
             @Override
-            public void mouseClicked(MouseEvent e) {
-            }
-
+            public void mouseClicked(MouseEvent e) {}
             @Override
-            public void mousePressed(MouseEvent e) {
-            }
-
+            public void mousePressed(MouseEvent e) {}
             @Override
             public void mouseReleased(MouseEvent e) {
                 mediaPlayer.seek(Duration.seconds(songSlider.getValue()));
             }
-
             @Override
-            public void mouseEntered(MouseEvent e) {
-            }
-
+            public void mouseEntered(MouseEvent e) {}
             @Override
-            public void mouseExited(MouseEvent e) {
-            }
+            public void mouseExited(MouseEvent e) {}
         });
         mediaPlayer.setOnEndOfMedia(new Runnable() {
             @Override
@@ -90,7 +78,6 @@ class PlayAction extends JFrame {
             }
         });
     }
-
     public void pauseSong(){
         pauseButton.addActionListener(e -> {
             System.out.println("stophehe");
@@ -151,10 +138,23 @@ class PlayAction extends JFrame {
         String[] newNames = names.toArray(new String[names.size()]);
         DefaultListModel<String> model = new DefaultListModel<>();
         for (String n : newNames) {
-            System.out.println(n);
             model.addElement(n);
         }
         list1.setModel(model);
+    }
+    public void listChoice(){
+        list1.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (e.getClickCount() == 2){
+                    volumeValue = mediaPlayer.getVolume();
+                    mediaPlayer.stop();
+                    i = list1.getSelectedIndex();
+                    play();
+                    mediaPlayer.setVolume(volumeValue);
+                }
+            }
+        });
     }
 
     public JButton getRunButton(){
@@ -198,9 +198,5 @@ class PlayAction extends JFrame {
     private JSlider songSlider;
     private JList list1;
     private JLabel timeLabel;
-    private DefaultListModel listModel;
-
-
-
 
 }

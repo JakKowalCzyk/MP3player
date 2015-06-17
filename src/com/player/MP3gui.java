@@ -57,6 +57,7 @@ class MP3gui extends JFrame {
             playAction.getTimeLabel();
             playAction.setList1();
             playAction.getList1();
+            playAction.listChoice();
         });
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
