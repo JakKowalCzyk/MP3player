@@ -155,15 +155,6 @@ class PlayAction extends JFrame {
             }
         });
     }
-    public void setStop(){
-        if (!runButton.isEnabled()) return;
-        else if (this.mediaPlayer != null){
-            mediaPlayer.stop();
-            runButton.setEnabled(true);
-            names = null;
-            players = null;
-        }
-    }
     public JButton getRunButton(){
         return runButton;
     }
