@@ -14,7 +14,6 @@ class MultipleChooserTest extends JFrame {
     public MultipleChooserTest(JFileChooser chooser, JButton listButton) {
         this.chooser = chooser;
         this.listButton = listButton;
-
     }
     public void open() {
         names = null;

@@ -3,8 +3,6 @@ package com.player;
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.media.MediaPlayer;
 import javax.swing.*;
-import javax.swing.plaf.metal.MetalLookAndFeel;
-import javax.swing.plaf.metal.OceanTheme;
 import java.util.ArrayList;
 import java.util.List;
 /**
@@ -29,10 +27,8 @@ class MP3gui extends JFrame {
     private ArrayList<String> names;
 
     public MP3gui() {
-
         chooser = new JFileChooser();
         MultipleChooserTest chooserTest = new MultipleChooserTest(chooser, listButton);
-        setTitle("HEH");
         listButton.addActionListener(e -> {
             chooserTest.open();
             players = chooserTest.getPlayers();
@@ -63,7 +59,6 @@ class MP3gui extends JFrame {
                 new JFXPanel();
             }
         });
-
         setContentPane(panel);
         pack();
     }

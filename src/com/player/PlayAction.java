@@ -79,13 +79,11 @@ class PlayAction extends JFrame {
     }
     public void pauseSong(){
         pauseButton.addActionListener(e -> {
-            System.out.println("stophehe");
             mediaPlayer.pause();
         });
     }
     public void unPauseSong(){
         unPauseButton.addActionListener(e -> {
-            System.out.println("unpas");
             mediaPlayer.getCurrentTime();
             mediaPlayer.play();
         });
